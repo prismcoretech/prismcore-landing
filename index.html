@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrismCore AI</title>
+  <meta name="description" content="PrismCore AI is an independent app studio building thoughtful, AI-powered mobile applications." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --white:       #ffffff;
+      --off-white:   #f7f6f4;
+      --ink:         #1e1c1a;
+      --ink-light:   #6b6560;
+      --ink-faint:   #c4bfba;
+      --rule:        #e8e4e0;
+      --cartful:     #5e8054;
+      --cartful-dim: #4a6742;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--off-white);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.1s;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .wordmark {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 3rem 3rem;
+      max-width: 780px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.25s;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-body {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-light);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.55s;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 3rem;
+      height: 1px;
+      background: var(--rule);
+      margin: 4rem 3rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.65s;
+    }
+
+    /* ── PRODUCTS ── */
+    .products {
+      padding: 0 3rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.75s;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 1.75rem;
+      font-weight: 400;
+    }
+
+    .product-card {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.75rem 2rem;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      max-width: 420px;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      border-color: var(--cartful);
+      box-shadow: 0 4px 24px rgba(94, 128, 84, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .product-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding-top: 0.1rem;
+    }
+
+    .product-name {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--ink-light);
+      line-height: 1.5;
+    }
+
+    .product-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cartful-dim);
+      font-weight: 400;
+    }
+
+    .product-status::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cartful);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.9s;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      font-weight: 300;
+    }
+
+    .footer-contact {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      font-weight: 300;
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .footer-contact:hover {
+      color: var(--ink);
+      border-color: var(--ink-light);
+    }
+
+    /* ── DECORATIVE RULE ── */
+    .page-rule {
+      width: calc(100% - 6rem);
+      margin: 0 3rem;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header,
+      .hero,
+      .products,
+      footer {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .divider {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+      }
+
+      .page-rule {
+        width: calc(100% - 3rem);
+        margin: 0 1.5rem;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .product-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img class="mark" src="mark.png" alt="PrismCore AI mark" />
+    <span class="wordmark">PrismCore AI</span>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">Independent App Studio</p>
+      <h1 class="hero-headline">Software built<br>around <em>real</em> problems.</h1>
+      <p class="hero-body">PrismCore AI is a one-person studio making mobile apps that fit into how people actually live, not how software assumes they do.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PRODUCTS -->
+    <section class="products">
+      <p class="section-label">Products</p>
+      <a class="product-card" href="https://cartfulapp.com" target="_blank" rel="noopener">
+        <!-- Cartful basket mark, white on green -->
+        <div class="product-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" aria-hidden="true">
+            <rect width="500" height="500" rx="100" fill="#5e8054"/>
+            <path d="M154.93,192.34c-.54-88.61,186.44-88.2,187,0" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+            <path d="M128.59,195.97h242.81c7.96,0,14.4,6.21,14.4,13.87h0c0,7.66-6.45,13.87-14.4,13.87h-242.81c-7.96,0-14.4-6.21-14.4-13.87h0c0-7.66,6.45-13.87,14.4-13.87Z" fill="#fff"/>
+            <path d="M120.43,221.97h256l-30,152h-196l-30-152Z" fill="#fff"/>
+            <line x1="124.98" y1="263.91" x2="376.05" y2="263.91" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
+            <line x1="130.43" y1="309.97" x2="366.43" y2="309.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
+            <line x1="183.43" y1="221.97" x2="168.43" y2="373.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
+            <line x1="248.43" y1="221.97" x2="248.43" y2="373.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
+            <line x1="313.43" y1="221.97" x2="328.43" y2="373.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
+            <path d="M248.43,195.97c-2-20-22-40-36-34-2,14,14,30,36,34Z" fill="#a9c09f"/>
+            <path d="M248.43,195.97c2-24,26-44,40-36,0,14-20,30-40,36Z" fill="#7f9f74"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <span class="product-name">Cartful</span>
+          <span class="product-desc">Meal planning and smart grocery shopping for families.</span>
+          <span class="product-status">In development</span>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <div class="page-rule" style="margin-top: 4rem;"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-copy">&copy; 2026 PrismCore AI, LLC</span>
+    <a class="footer-contact" href="mailto:hello@prismcoretech.com">hello@prismcoretech.com</a>
+  </footer>
+
+</body>
+</html>
