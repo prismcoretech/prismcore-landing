@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PrismCore AI</title>
-  <meta name="description" content="PrismCore AI is an independent app studio building thoughtful, AI-powered mobile applications." />
+  <meta name="description" content="PrismCore AI is an independent app studio" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -40,9 +40,17 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
 
-    /* ── HEADER ── */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
     header {
       padding: 2.5rem 3rem;
       display: flex;
@@ -68,7 +76,6 @@
       line-height: 1;
     }
 
-    /* ── HERO ── */
     .hero {
       flex: 1;
       display: flex;
@@ -120,7 +127,6 @@
       animation-delay: 0.55s;
     }
 
-    /* ── DIVIDER ── */
     .divider {
       width: 3rem;
       height: 1px;
@@ -131,7 +137,6 @@
       animation-delay: 0.65s;
     }
 
-    /* ── PRODUCTS ── */
     .products {
       padding: 0 3rem;
       opacity: 0;
@@ -227,7 +232,6 @@
       background: var(--cartful);
     }
 
-    /* ── FOOTER ── */
     footer {
       padding: 3rem;
       margin-top: auto;
@@ -262,7 +266,6 @@
       border-color: var(--ink-light);
     }
 
-    /* ── DECORATIVE RULE ── */
     .page-rule {
       width: calc(100% - 6rem);
       margin: 0 3rem;
@@ -270,7 +273,6 @@
       background: var(--rule);
     }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -282,7 +284,6 @@
       }
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       header,
       .hero,
@@ -313,14 +314,13 @@
   </style>
 </head>
 <body>
+  <div class="container">
 
-  <!-- HEADER -->
   <header>
     <img class="mark" src="mark.png" alt="PrismCore AI mark" />
     <span class="wordmark">PrismCore AI</span>
   </header>
 
-  <!-- HERO -->
   <main>
     <section class="hero">
       <p class="hero-eyebrow">Independent App Studio</p>
@@ -328,9 +328,7 @@
       <p class="hero-body">PrismCore AI is a one-person studio making mobile apps that fit into how people actually live, not how software assumes they do.</p>
     </section>
 
-    <div class="divider"></div>
 
-    <!-- PRODUCTS -->
     <section class="products">
       <p class="section-label">Products</p>
       <a class="product-card" href="https://cartfulapp.com" target="_blank" rel="noopener">
@@ -361,11 +359,10 @@
 
   <div class="page-rule" style="margin-top: 4rem;"></div>
 
-  <!-- FOOTER -->
   <footer>
     <span class="footer-copy">&copy; 2026 PrismCore AI, LLC</span>
     <a class="footer-contact" href="mailto:hello@prismcoretech.com">hello@prismcoretech.com</a>
   </footer>
 
+  </div>
 </body>
-</html>
