@@ -2,12 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PrismCore AI</title>
-  <meta name="description" content="PrismCore AI is an independent app studio" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+
+  <title>PrismCore | Okta consulting</title>
+  <meta name="description" content="Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer." />
+
+  <link rel="canonical" href="https://prismcoretech.com/" />
+  <link rel="icon" href="mark.png" />
+  <link rel="apple-touch-icon" href="mark.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PrismCore" />
+  <meta property="og:url" content="https://prismcoretech.com/" />
+  <meta property="og:title" content="PrismCore | Okta consulting" />
+  <meta property="og:description" content="Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer." />
+  <meta property="og:image" content="https://prismcoretech.com/mark.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PrismCore | Okta consulting" />
+  <meta name="twitter:description" content="Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer." />
+  <meta name="twitter:image" content="https://prismcoretech.com/mark.png" />
+
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -16,352 +31,326 @@
     }
 
     :root {
-      --white:       #ffffff;
-      --off-white:   #f7f6f4;
-      --ink:         #1e1c1a;
-      --ink-light:   #6b6560;
-      --ink-faint:   #c4bfba;
-      --rule:        #e8e4e0;
-      --cartful:     #5e8054;
-      --cartful-dim: #4a6742;
+      --bg:        #fbfbfa;
+      --ink:       #1a1c1e;
+      --ink-soft:  #53585d;
+      --ink-faint: #8b9095;
+      --rule:      #e5e5e1;
+      --accent:    #2b5566;
+      --accent-dk: #1e3d4a;
+
+      --measure: 720px;
+      --gutter: 1.5rem;
     }
 
     html {
       font-size: 16px;
+      -webkit-text-size-adjust: 100%;
       -webkit-font-smoothing: antialiased;
-      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
     }
 
     body {
-      background-color: var(--off-white);
+      background: var(--bg);
       color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
     }
 
-    .container {
+    .wrap {
       width: 100%;
-      max-width: 900px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
+      max-width: var(--measure);
+      margin: 0 auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
     }
 
-    header {
-      padding: 2.5rem 3rem;
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* Top bar */
+
+    .topbar {
       display: flex;
-      align-items: center;
+      align-items: baseline;
+      justify-content: space-between;
       gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.1s;
-    }
-
-    .mark {
-      width: 36px;
-      height: 36px;
-      flex-shrink: 0;
+      padding-top: 1.75rem;
+      padding-bottom: 1.75rem;
     }
 
     .wordmark {
-      font-family: 'Cinzel', serif;
-      font-weight: 400;
-      font-size: 1.15rem;
-      letter-spacing: 0.04em;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: 0.015em;
       color: var(--ink);
-      line-height: 1;
     }
+
+    .topbar-link {
+      font-size: 0.9375rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .topbar-link:hover {
+      color: var(--ink);
+      border-bottom-color: var(--ink-faint);
+    }
+
+    /* Hero */
 
     .hero {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 4rem 3rem 3rem;
-      max-width: 780px;
+      padding-top: 3.5rem;
+      padding-bottom: 5.5rem;
     }
 
-    .hero-eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      margin-bottom: 1.75rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.25s;
+    h1 {
+      font-size: clamp(2rem, 5.2vw, 2.875rem);
+      line-height: 1.12;
+      letter-spacing: -0.021em;
+      font-weight: 600;
+      max-width: 15ch;
     }
 
-    .hero-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2.6rem, 6vw, 4.2rem);
-      line-height: 1.08;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.4s;
+    .subhead {
+      margin-top: 1.25rem;
+      font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 44ch;
     }
 
-    .hero-headline em {
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    .hero-body {
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8125rem 1.5rem;
+      background: var(--accent);
+      color: #fff;
       font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--ink-light);
-      max-width: 520px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.55s;
-    }
-
-    .divider {
-      width: 3rem;
-      height: 1px;
-      background: var(--rule);
-      margin: 4rem 3rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.65s;
-    }
-
-    .products {
-      padding: 0 3rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.75s;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 1.75rem;
-      font-weight: 400;
-    }
-
-    .product-card {
-      display: inline-flex;
-      align-items: flex-start;
-      gap: 1.25rem;
-      padding: 1.75rem 2rem;
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 14px;
-      max-width: 420px;
-      width: 100%;
+      font-weight: 500;
       text-decoration: none;
-      color: inherit;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
     }
 
-    .product-card:hover {
-      border-color: var(--cartful);
-      box-shadow: 0 4px 24px rgba(94, 128, 84, 0.1);
-      transform: translateY(-2px);
+    .btn:hover {
+      background: var(--accent-dk);
+      border-color: var(--accent-dk);
     }
 
-    .product-icon {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border-color: #c3cfd4;
+    }
+
+    .btn-outline:hover {
+      background: transparent;
+      color: var(--accent-dk);
+      border-color: var(--accent);
+    }
+
+    .proof {
+      list-style: none;
       display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .product-icon svg {
-      width: 48px;
-      height: 48px;
-    }
-
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      padding-top: 0.1rem;
-    }
-
-    .product-name {
-      font-family: 'Cinzel', serif;
-      font-weight: 400;
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      line-height: 1;
-    }
-
-    .product-desc {
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: var(--ink-light);
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
       line-height: 1.5;
+      color: var(--ink-faint);
     }
 
-    .product-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
-      font-size: 0.7rem;
+    .proof li:not(:last-child)::after {
+      content: "·";
+      padding: 0 0.5rem;
+      color: #c8ccce;
+    }
+
+    /* Sections */
+
+    section + section { padding-top: 3.25rem; }
+
+    .last { padding-bottom: 4rem; }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--cartful-dim);
-      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
     }
 
-    .product-status::before {
-      content: '';
-      display: block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--cartful);
+    /* What I do */
+
+    .services { font-size: 0.9375rem; }
+
+    .services > div {
+      display: grid;
+      grid-template-columns: 11rem 1fr;
+      gap: 0 1.5rem;
+      padding: 0.8125rem 0;
+      border-top: 1px solid var(--rule);
     }
+
+    .services dt {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .services dd { color: var(--ink-soft); }
+
+    /* How engagements work */
+
+    .steps {
+      list-style: none;
+      font-size: 0.9375rem;
+      color: var(--ink-soft);
+    }
+
+    .steps li {
+      position: relative;
+      padding-left: 1.375rem;
+      margin-bottom: 0.625rem;
+    }
+
+    .steps li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.78em;
+      width: 0.625rem;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.55;
+    }
+
+    /* About + contact */
+
+    .prose {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 62ch;
+    }
+
+    #contact .btn { margin-top: 1.125rem; }
+
+    /* Footer */
 
     footer {
-      padding: 3rem;
       margin-top: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.9s;
-    }
-
-    .footer-copy {
-      font-size: 0.8rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.75rem;
+      padding-bottom: 1.75rem;
+      font-size: 0.8125rem;
       color: var(--ink-faint);
-      font-weight: 300;
     }
 
-    .footer-contact {
-      font-size: 0.8rem;
-      color: var(--ink-light);
-      font-weight: 300;
-      text-decoration: none;
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: 1px;
-      transition: color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .footer-contact:hover {
-      color: var(--ink);
-      border-color: var(--ink-light);
-    }
-
-    .page-rule {
-      width: calc(100% - 6rem);
-      margin: 0 3rem;
-      height: 1px;
-      background: var(--rule);
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      header,
-      .hero,
-      .products,
-      footer {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-
-      .divider {
-        margin-left: 1.5rem;
-        margin-right: 1.5rem;
-      }
-
-      .page-rule {
-        width: calc(100% - 3rem);
-        margin: 0 1.5rem;
-      }
-
+    @media (max-width: 40rem) {
       .hero {
-        padding-top: 2.5rem;
+        padding-top: 2.25rem;
+        padding-bottom: 3.5rem;
       }
 
-      .product-card {
-        max-width: 100%;
+      section + section { padding-top: 2.75rem; }
+
+      .services > div {
+        grid-template-columns: 1fr;
+        gap: 0.1875rem;
+        padding: 0.875rem 0;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-  <header>
-    <img class="mark" src="mark.png" alt="PrismCore AI mark" />
-    <span class="wordmark">PrismCore AI</span>
+  <header class="topbar wrap">
+    <span class="wordmark">PrismCore</span>
+    <a class="topbar-link" href="#contact">Contact</a>
   </header>
 
   <main>
-    <section class="hero">
-      <p class="hero-eyebrow">Independent Studio</p>
-      <h1 class="hero-headline">Software built<br>around <em>real</em> problems.</h1>
-      <p class="hero-body">Every product starts with a problem I couldn't find a good solution for.</p>
+
+    <section class="hero wrap">
+      <h1>Okta help for growing IT teams</h1>
+      <p class="subhead">Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer.</p>
+      <a class="btn" href="mailto:jacob@prismcoretech.com">Email me</a>
+      <ul class="proof">
+        <li>Led an organization-wide Okta rollout</li>
+        <li>SSO and SCIM across dozens of apps</li>
+        <li>Company-wide MFA for 1,200 users</li>
+      </ul>
     </section>
 
-
-    <section class="products">
-      <p class="section-label">Products</p>
-      <a class="product-card" href="https://cartfulapp.com" target="_blank" rel="noopener">
-        <div class="product-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" aria-hidden="true">
-            <rect width="500" height="500" rx="100" fill="#5e8054"/>
-            <path d="M154.93,192.34c-.54-88.61,186.44-88.2,187,0" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
-            <path d="M128.59,195.97h242.81c7.96,0,14.4,6.21,14.4,13.87h0c0,7.66-6.45,13.87-14.4,13.87h-242.81c-7.96,0-14.4-6.21-14.4-13.87h0c0-7.66,6.45-13.87,14.4-13.87Z" fill="#fff"/>
-            <path d="M120.43,221.97h256l-30,152h-196l-30-152Z" fill="#fff"/>
-            <line x1="124.98" y1="263.91" x2="376.05" y2="263.91" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
-            <line x1="130.43" y1="309.97" x2="366.43" y2="309.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
-            <line x1="183.43" y1="221.97" x2="168.43" y2="373.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
-            <line x1="248.43" y1="221.97" x2="248.43" y2="373.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
-            <line x1="313.43" y1="221.97" x2="328.43" y2="373.97" stroke="#5e8054" stroke-width="7" opacity="0.22"/>
-            <path d="M248.43,195.97c-2-20-22-40-36-34-2,14,14,30,36,34Z" fill="#a9c09f"/>
-            <path d="M248.43,195.97c2-24,26-44,40-36,0,14-20,30-40,36Z" fill="#7f9f74"/>
-          </svg>
+    <section class="wrap">
+      <h2>What I do</h2>
+      <dl class="services">
+        <div>
+          <dt>Tenant cleanup:</dt>
+          <dd>Stale accounts, group sprawl, app assignments, and admin roles, fixed without breaking anyone's access.</dd>
         </div>
-        <div class="product-info">
-          <span class="product-name">Cartful</span>
-          <span class="product-desc">Clean meal planning and smart grocery shopping for families.</span>
-          <span class="product-status">In development</span>
+        <div>
+          <dt>App integrations:</dt>
+          <dd>SAML and OIDC, new or broken.</dd>
         </div>
-      </a>
+        <div>
+          <dt>Provisioning:</dt>
+          <dd>SCIM and lifecycle automation so onboarding and offboarding happen on time.</dd>
+        </div>
+        <div>
+          <dt>MFA rollouts:</dt>
+          <dd>Okta Verify and phishing-resistant MFA, including getting people enrolled.</dd>
+        </div>
+        <div>
+          <dt>Automation:</dt>
+          <dd>Okta API tooling for the repetitive admin work nobody has time for.</dd>
+        </div>
+      </dl>
     </section>
+
+    <section class="wrap">
+      <h2>How engagements work</h2>
+      <ul class="steps">
+        <li>Fixed scope and price, agreed in writing before any work starts.</li>
+        <li>Least-privilege access that you control and can revoke anytime.</li>
+        <li>Every change piloted with a small group before it reaches everyone.</li>
+        <li>NDA on every project. BAA for healthcare.</li>
+        <li>Documentation at handoff so your team can run it after.</li>
+      </ul>
+    </section>
+
+    <section class="wrap">
+      <h2>About</h2>
+      <p class="prose">PrismCore is the Okta practice of Jacob, a working Okta administrator who led the full Okta rollout at a 1,200-person, HIPAA-regulated healthcare company. That work covered SSO and SCIM across dozens of SaaS apps, attribute-based access control, company-wide MFA, and internal automation that saves 10 to 20 hours of admin work a week. You work with me directly.</p>
+    </section>
+
+    <section class="wrap last" id="contact">
+      <h2>Contact</h2>
+      <p class="prose">Tell me what's going on in your Okta tenant.</p>
+      <a class="btn btn-outline" href="mailto:jacob@prismcoretech.com">jacob@prismcoretech.com</a>
+    </section>
+
   </main>
 
-  <div class="page-rule" style="margin-top: 4rem;"></div>
-
   <footer>
-    <span class="footer-copy">&copy; 2026 PrismCore AI, LLC</span>
-    <a class="footer-contact" href="mailto:hello@prismcoretech.com">hello@prismcoretech.com</a>
+    <div class="wrap">&copy; 2026 PrismCore AI LLC.</div>
   </footer>
 
-  </div>
 </body>
+</html>
