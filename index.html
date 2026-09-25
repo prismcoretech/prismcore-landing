@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light" />
 
   <title>PrismCore | Okta consulting</title>
-  <meta name="description" content="Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer." />
+  <meta name="description" content="Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer." />
 
   <link rel="canonical" href="https://prismcoretech.com/" />
   <link rel="icon" href="mark.png" />
@@ -16,37 +16,36 @@
   <meta property="og:site_name" content="PrismCore" />
   <meta property="og:url" content="https://prismcoretech.com/" />
   <meta property="og:title" content="PrismCore | Okta consulting" />
-  <meta property="og:description" content="Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer." />
+  <meta property="og:description" content="Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer." />
   <meta property="og:image" content="https://prismcoretech.com/mark.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="PrismCore | Okta consulting" />
-  <meta name="twitter:description" content="Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer." />
+  <meta name="twitter:description" content="Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer." />
   <meta name="twitter:image" content="https://prismcoretech.com/mark.png" />
 
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #fbfbfa;
-      --ink:       #1a1c1e;
-      --ink-soft:  #53585d;
-      --ink-faint: #8b9095;
-      --rule:      #e5e5e1;
-      --accent:    #2b5566;
-      --accent-dk: #1e3d4a;
+      --paper:       #ffffff;
+      --ink:         #0f1721;
+      --muted:       #566370;
+      --faint:       #8a95a1;
+      --line:        #e2e6ea;
+      --accent:      #0b6079;
+      --accent-deep: #084b5f;
+      --band:        #f1f7f9;
+      --band-line:   #d3e0e4;
 
-      --measure: 720px;
-      --gutter: 1.5rem;
+      --shell: 1240px;
+      --pad: 2.5rem;
     }
 
     html {
       font-size: 16px;
       -webkit-text-size-adjust: 100%;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     @media (prefers-reduced-motion: no-preference) {
@@ -54,302 +53,386 @@
     }
 
     body {
-      background: var(--bg);
+      background: var(--paper);
       color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                    "Helvetica Neue", Arial, sans-serif;
       font-size: 1rem;
-      line-height: 1.6;
-      min-height: 100vh;
+      line-height: 1.55;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
-    .wrap {
+    .shell {
       width: 100%;
-      max-width: var(--measure);
+      max-width: var(--shell);
       margin: 0 auto;
-      padding-left: var(--gutter);
-      padding-right: var(--gutter);
+      padding-left: var(--pad);
+      padding-right: var(--pad);
     }
 
     a { color: inherit; }
 
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 2px;
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    h2 {
+      font-size: 1.1875rem;
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      line-height: 1.3;
+      margin-bottom: 1.25rem;
     }
 
-    /* Top bar */
+    /* ---- Top bar ---- */
 
-    .topbar {
+    .topbeam { height: 3px; background: var(--accent); }
+
+    .topbar { border-bottom: 1px solid var(--line); }
+
+    .topbar-in {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding-top: 1.75rem;
-      padding-bottom: 1.75rem;
+      height: 4rem;
     }
+
+    .brand { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+    /* mark.png is 500x500 with the glyph filling only the middle 40%,
+       so it is oversized inside a clipped box to crop the dead padding */
+    .mark {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .mark img { width: 48px; height: 48px; flex: none; display: block; }
 
     .wordmark {
-      font-size: 1.0625rem;
+      font-size: 1rem;
       font-weight: 600;
-      letter-spacing: 0.015em;
-      color: var(--ink);
+      letter-spacing: -0.012em;
     }
 
-    .topbar-link {
-      font-size: 0.9375rem;
-      color: var(--ink-soft);
+    .nav-link {
+      font-size: 0.875rem;
+      color: var(--muted);
       text-decoration: none;
-      padding-bottom: 2px;
+      padding: 0.375rem 0;
       border-bottom: 1px solid transparent;
+      white-space: nowrap;
     }
 
-    .topbar-link:hover {
-      color: var(--ink);
-      border-bottom-color: var(--ink-faint);
-    }
+    .nav-link:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
-    /* Hero */
+    /* ---- Hero ---- */
 
-    .hero {
-      padding-top: 3.5rem;
-      padding-bottom: 5.5rem;
-    }
+    .hero { padding-top: 4.5rem; padding-bottom: 4rem; }
 
     h1 {
-      font-size: clamp(2rem, 5.2vw, 2.875rem);
-      line-height: 1.12;
-      letter-spacing: -0.021em;
-      font-weight: 600;
-      max-width: 15ch;
+      font-size: clamp(1.9375rem, 4.2vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.031em;
+      max-width: 22ch;
+      text-wrap: balance;
     }
 
-    .subhead {
-      margin-top: 1.25rem;
-      font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
-      line-height: 1.55;
-      color: var(--ink-soft);
-      max-width: 44ch;
+    .lede {
+      margin-top: 1.375rem;
+      font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 58ch;
     }
 
     .btn {
       display: inline-block;
       margin-top: 2rem;
-      padding: 0.8125rem 1.5rem;
+      padding: 0.75rem 1.375rem;
       background: var(--accent);
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.9375rem;
       font-weight: 500;
+      letter-spacing: -0.005em;
       text-decoration: none;
       border: 1px solid var(--accent);
-      border-radius: 6px;
+      border-radius: 3px;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
 
-    .btn:hover {
-      background: var(--accent-dk);
-      border-color: var(--accent-dk);
+    .btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+
+    .btn-ghost { background: transparent; color: var(--ink); border-color: #c8d0d8; }
+    .btn-ghost:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
+
+    /* ---- Proof band (tinted, divided cells) ---- */
+
+    .band {
+      background: var(--band);
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--band-line);
     }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--accent);
-      border-color: #c3cfd4;
-    }
+    .proof { display: grid; grid-template-columns: repeat(3, 1fr); }
 
-    .btn-outline:hover {
-      background: transparent;
-      color: var(--accent-dk);
-      border-color: var(--accent);
-    }
-
-    .proof {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-      font-size: 0.875rem;
-      line-height: 1.5;
-      color: var(--ink-faint);
-    }
-
-    .proof li:not(:last-child)::after {
-      content: "·";
-      padding: 0 0.5rem;
-      color: #c8ccce;
-    }
-
-    /* Sections */
-
-    section + section { padding-top: 3.25rem; }
-
-    .last { padding-bottom: 4rem; }
-
-    h2 {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-
-    /* What I do */
-
-    .services { font-size: 0.9375rem; }
-
-    .services > div {
-      display: grid;
-      grid-template-columns: 11rem 1fr;
-      gap: 0 1.5rem;
-      padding: 0.8125rem 0;
-      border-top: 1px solid var(--rule);
-    }
-
-    .services dt {
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .services dd { color: var(--ink-soft); }
-
-    /* How engagements work */
-
-    .steps {
-      list-style: none;
+    .proof p {
+      padding: 1.375rem 1.75rem;
+      border-left: 1px solid var(--band-line);
       font-size: 0.9375rem;
-      color: var(--ink-soft);
+      line-height: 1.45;
     }
 
-    .steps li {
+    .proof p:first-child { padding-left: 0; border-left: 0; }
+    .proof p:last-child { padding-right: 0; }
+
+    /* ---- Sections ---- */
+
+    .section { padding-top: 3rem; padding-bottom: 3rem; }
+
+    .tint {
+      background: var(--band);
+      border-top: 1px solid var(--band-line);
+      border-bottom: 1px solid var(--band-line);
+    }
+
+    /* ---- What I do: hairline spec grid ---- */
+
+    .rows { border-top: 1px solid var(--line); }
+
+    .rows > div {
+      display: grid;
+      grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+      column-gap: 2rem;
+      padding: 0.8125rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rows dt {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -0.008em;
+    }
+
+    .rows dd {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 82ch;
+    }
+
+    /* ---- How engagements work: outlined panel, accent markers ---- */
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1.625rem 1.75rem;
+    }
+
+    .terms {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 3rem;
+      row-gap: 1rem;
+    }
+
+    .terms li {
       position: relative;
-      padding-left: 1.375rem;
-      margin-bottom: 0.625rem;
+      padding-left: 1.125rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--muted);
     }
 
-    .steps li::before {
+    .terms li::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 0.78em;
-      width: 0.625rem;
-      height: 1px;
+      top: 0.58em;
+      width: 6px;
+      height: 6px;
+      border-radius: 1px;
       background: var(--accent);
-      opacity: 0.55;
     }
 
-    /* About + contact */
+    /* ---- About ---- */
 
-    .prose {
-      font-size: 0.9375rem;
-      line-height: 1.7;
-      color: var(--ink-soft);
-      max-width: 62ch;
+    .prose { max-width: 74ch; }
+
+    .prose p {
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--muted);
     }
 
-    #contact .btn { margin-top: 1.125rem; }
+    .prose p + p { margin-top: 1rem; }
 
-    /* Footer */
+    /* ---- Contact ---- */
+
+    .contact-line { font-size: 1.0625rem; color: var(--ink); max-width: 46ch; }
+    #contact .btn { margin-top: 1.25rem; }
+
+    /* ---- Footer ---- */
 
     footer {
       margin-top: auto;
-      border-top: 1px solid var(--rule);
-      padding-top: 1.75rem;
-      padding-bottom: 1.75rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
       font-size: 0.8125rem;
-      color: var(--ink-faint);
+      color: var(--faint);
+    }
+
+    /* ---- Breakpoints ---- */
+
+    @media (max-width: 64rem) {
+      :root { --pad: 2rem; }
+      .hero { padding-top: 3.5rem; padding-bottom: 3.25rem; }
+      .section { padding-top: 3.25rem; padding-bottom: 3.25rem; }
+    }
+
+    @media (max-width: 62rem) {
+      .proof { grid-template-columns: 1fr; }
+
+      .proof p {
+        padding: 0.875rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--band-line);
+      }
+
+      .proof p:first-child { padding-top: 1.125rem; border-top: 0; }
+      .proof p:last-child { padding-bottom: 1.125rem; }
+
+    }
+
+    @media (max-width: 55rem) {
+      .terms { grid-template-columns: 1fr; row-gap: 0.875rem; }
     }
 
     @media (max-width: 40rem) {
-      .hero {
-        padding-top: 2.25rem;
-        padding-bottom: 3.5rem;
-      }
+      :root { --pad: 1.375rem; }
 
-      section + section { padding-top: 2.75rem; }
+      .hero { padding-top: 2.75rem; padding-bottom: 2.5rem; }
+      .section { padding-top: 2.75rem; padding-bottom: 2.75rem; }
 
-      .services > div {
+      .panel { padding: 1.375rem 1.25rem; }
+
+      .rows > div {
         grid-template-columns: 1fr;
-        gap: 0.1875rem;
+        row-gap: 0.1875rem;
         padding: 0.875rem 0;
       }
+
+      .prose p { font-size: 1rem; }
+      .contact-line { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <header class="topbar wrap">
-    <span class="wordmark">PrismCore</span>
-    <a class="topbar-link" href="#contact">Contact</a>
+  <div class="topbeam"></div>
+
+  <header class="topbar">
+    <div class="shell topbar-in">
+      <span class="brand">
+        <span class="mark"><img src="mark.png" alt="" /></span>
+        <span class="wordmark">PrismCore</span>
+      </span>
+      <a class="nav-link" href="#contact">Contact</a>
+    </div>
   </header>
 
   <main>
 
-    <section class="hero wrap">
+    <section class="hero shell">
       <h1>Okta help for growing IT teams</h1>
-      <p class="subhead">Cleanup, integrations, provisioning, and MFA rollouts for companies of 100 to 500 people without a dedicated identity engineer.</p>
+      <p class="lede">Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer.</p>
       <a class="btn" href="mailto:jacob@prismcoretech.com">Email me</a>
-      <ul class="proof">
-        <li>Led an organization-wide Okta rollout</li>
-        <li>SSO and SCIM across dozens of apps</li>
-        <li>Company-wide MFA for 1,200 users</li>
-      </ul>
     </section>
 
-    <section class="wrap">
-      <h2>What I do</h2>
-      <dl class="services">
-        <div>
-          <dt>Tenant cleanup:</dt>
-          <dd>Stale accounts, group sprawl, app assignments, and admin roles, fixed without breaking anyone's access.</dd>
-        </div>
-        <div>
-          <dt>App integrations:</dt>
-          <dd>SAML and OIDC, new or broken.</dd>
-        </div>
-        <div>
-          <dt>Provisioning:</dt>
-          <dd>SCIM and lifecycle automation so onboarding and offboarding happen on time.</dd>
-        </div>
-        <div>
-          <dt>MFA rollouts:</dt>
-          <dd>Okta Verify and phishing-resistant MFA, including getting people enrolled.</dd>
-        </div>
-        <div>
-          <dt>Automation:</dt>
-          <dd>Okta API tooling for the repetitive admin work nobody has time for.</dd>
-        </div>
-      </dl>
+    <section class="band">
+      <div class="shell proof">
+        <p>Led an organization-wide Okta rollout</p>
+        <p>SSO and SCIM across dozens of apps</p>
+        <p>Company-wide MFA for 1,200 users</p>
+      </div>
     </section>
 
-    <section class="wrap">
-      <h2>How engagements work</h2>
-      <ul class="steps">
-        <li>Fixed scope and price, agreed in writing before any work starts.</li>
-        <li>Least-privilege access that you control and can revoke anytime.</li>
-        <li>Every change piloted with a small group before it reaches everyone.</li>
-        <li>NDA on every project. BAA for healthcare.</li>
-        <li>Documentation at handoff so your team can run it after.</li>
-      </ul>
+    <section class="section">
+      <div class="shell">
+        <h2>What I do</h2>
+        <dl class="rows">
+          <div>
+            <dt>Tenant cleanup:</dt>
+            <dd>Stale accounts, group sprawl, app assignments, and admin roles, fixed without breaking anyone's access.</dd>
+          </div>
+          <div>
+            <dt>App integrations:</dt>
+            <dd>SAML and OIDC, new or broken.</dd>
+          </div>
+          <div>
+            <dt>Provisioning:</dt>
+            <dd>SCIM and lifecycle automation so onboarding and offboarding happen on time.</dd>
+          </div>
+          <div>
+            <dt>MFA rollouts:</dt>
+            <dd>Okta Verify and phishing-resistant MFA, including getting people enrolled.</dd>
+          </div>
+          <div>
+            <dt>Automation:</dt>
+            <dd>Okta API tooling for the repetitive admin work nobody has time for.</dd>
+          </div>
+        </dl>
+      </div>
     </section>
 
-    <section class="wrap">
-      <h2>About</h2>
-      <p class="prose">PrismCore is the Okta practice of Jacob, a working Okta administrator who led the full Okta rollout at a 1,200-person, HIPAA-regulated healthcare company. That work covered SSO and SCIM across dozens of SaaS apps, attribute-based access control, company-wide MFA, and internal automation that saves 10 to 20 hours of admin work a week. You work with me directly.</p>
+    <section class="section">
+      <div class="shell">
+        <h2>How engagements work</h2>
+        <div class="panel">
+          <ul class="terms">
+            <li>Fixed scope and price, agreed in writing before any work starts.</li>
+            <li>Least-privilege access that you control and can revoke anytime.</li>
+            <li>Every change piloted with a small group before it reaches everyone.</li>
+            <li>NDA on every project. BAA for healthcare.</li>
+            <li>Documentation at handoff so your team can run it after.</li>
+            <li>Ongoing support on a monthly retainer if you want it after the project.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section class="wrap last" id="contact">
-      <h2>Contact</h2>
-      <p class="prose">Tell me what's going on in your Okta tenant.</p>
-      <a class="btn btn-outline" href="mailto:jacob@prismcoretech.com">jacob@prismcoretech.com</a>
+    <section class="section">
+      <div class="shell">
+        <h2>About</h2>
+        <div class="prose">
+          <p>I'm Jacob, an experienced Okta administrator. I've worked at companies of 1,000+ employees, including HIPAA-regulated healthcare, and led a full Okta rollout end to end: SSO and SCIM across dozens of SaaS apps, attribute-based access control, and company-wide MFA.</p>
+          <p>I built custom sync middleware with Workday, developed RBAC models and JML automations that tightened up onboarding and offboarding, and wrote a custom SCIM router for the apps where Okta's built-in integrations don't exist or where we needed more control over the workflow.</p>
+          <p>PrismCore is my practice, and you work with me directly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tint" id="contact">
+      <div class="shell">
+        <h2>Contact</h2>
+        <p class="contact-line">Tell me what's going on in your Okta tenant.</p>
+        <a class="btn btn-ghost" href="mailto:jacob@prismcoretech.com">jacob@prismcoretech.com</a>
+      </div>
     </section>
 
   </main>
 
   <footer>
-    <div class="wrap">&copy; 2026 PrismCore AI LLC.</div>
+    <div class="shell">&copy; 2026 PrismCore AI LLC.</div>
   </footer>
 
 </body>
