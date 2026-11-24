@@ -1,439 +1,299 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light" />
-
-  <title>PrismCore | Okta consulting</title>
-  <meta name="description" content="Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer." />
-
-  <link rel="canonical" href="https://prismcoretech.com/" />
-  <link rel="icon" href="mark.png" />
-  <link rel="apple-touch-icon" href="mark.png" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="PrismCore" />
-  <meta property="og:url" content="https://prismcoretech.com/" />
-  <meta property="og:title" content="PrismCore | Okta consulting" />
-  <meta property="og:description" content="Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer." />
-  <meta property="og:image" content="https://prismcoretech.com/mark.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PrismCore | Okta consulting" />
-  <meta name="twitter:description" content="Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer." />
-  <meta name="twitter:image" content="https://prismcoretech.com/mark.png" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --paper:       #ffffff;
-      --ink:         #0f1721;
-      --muted:       #566370;
-      --faint:       #8a95a1;
-      --line:        #e2e6ea;
-      --accent:      #0b6079;
-      --accent-deep: #084b5f;
-      --band:        #f1f7f9;
-      --band-line:   #d3e0e4;
-
-      --shell: 1240px;
-      --pad: 2.5rem;
-    }
-
-    html {
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      html { scroll-behavior: smooth; }
-    }
-
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.55;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: var(--shell);
-      margin: 0 auto;
-      padding-left: var(--pad);
-      padding-right: var(--pad);
-    }
-
-    a { color: inherit; }
-
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-    h2 {
-      font-size: 1.1875rem;
-      font-weight: 600;
-      letter-spacing: -0.018em;
-      line-height: 1.3;
-      margin-bottom: 1.25rem;
-    }
-
-    /* ---- Top bar ---- */
-
-    .topbeam { height: 3px; background: var(--accent); }
-
-    .topbar { border-bottom: 1px solid var(--line); }
-
-    .topbar-in {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      height: 4rem;
-    }
-
-    .brand { display: inline-flex; align-items: center; gap: 0.5rem; }
-
-    /* mark.png is 500x500 with the glyph filling only the middle 40%,
-       so it is oversized inside a clipped box to crop the dead padding */
-    .mark {
-      width: 22px;
-      height: 22px;
-      flex: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .mark img { width: 48px; height: 48px; flex: none; display: block; }
-
-    .wordmark {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.012em;
-    }
-
-    .nav-link {
-      font-size: 0.875rem;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.375rem 0;
-      border-bottom: 1px solid transparent;
-      white-space: nowrap;
-    }
-
-    .nav-link:hover { color: var(--ink); border-bottom-color: var(--accent); }
-
-    /* ---- Hero ---- */
-
-    .hero { padding-top: 4.5rem; padding-bottom: 4rem; }
-
-    h1 {
-      font-size: clamp(1.9375rem, 4.2vw, 3.75rem);
-      font-weight: 700;
-      line-height: 1.04;
-      letter-spacing: -0.031em;
-      max-width: 22ch;
-      text-wrap: balance;
-    }
-
-    .lede {
-      margin-top: 1.375rem;
-      font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
-      line-height: 1.5;
-      color: var(--muted);
-      max-width: 58ch;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.375rem;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      letter-spacing: -0.005em;
-      text-decoration: none;
-      border: 1px solid var(--accent);
-      border-radius: 3px;
-      max-width: 100%;
-      overflow-wrap: break-word;
-    }
-
-    .btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
-
-    .btn-ghost { background: transparent; color: var(--ink); border-color: #c8d0d8; }
-    .btn-ghost:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
-
-    /* ---- Proof band (tinted, divided cells) ---- */
-
-    .band {
-      background: var(--band);
-      border-top: 1px solid var(--accent);
-      border-bottom: 1px solid var(--band-line);
-    }
-
-    .proof { display: grid; grid-template-columns: repeat(3, 1fr); }
-
-    .proof p {
-      padding: 1.375rem 1.75rem;
-      border-left: 1px solid var(--band-line);
-      font-size: 0.9375rem;
-      line-height: 1.45;
-    }
-
-    .proof p:first-child { padding-left: 0; border-left: 0; }
-    .proof p:last-child { padding-right: 0; }
-
-    /* ---- Sections ---- */
-
-    .section { padding-top: 3rem; padding-bottom: 3rem; }
-
-    .tint {
-      background: var(--band);
-      border-top: 1px solid var(--band-line);
-      border-bottom: 1px solid var(--band-line);
-    }
-
-    /* ---- What I do: hairline spec grid ---- */
-
-    .rows { border-top: 1px solid var(--line); }
-
-    .rows > div {
-      display: grid;
-      grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
-      column-gap: 2rem;
-      padding: 0.8125rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .rows dt {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: -0.008em;
-    }
-
-    .rows dd {
-      font-size: 0.9375rem;
-      line-height: 1.55;
-      color: var(--muted);
-      max-width: 82ch;
-    }
-
-    /* ---- How engagements work: outlined panel, accent markers ---- */
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 1.625rem 1.75rem;
-    }
-
-    .terms {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 3rem;
-      row-gap: 1rem;
-    }
-
-    .terms li {
-      position: relative;
-      padding-left: 1.125rem;
-      font-size: 0.9375rem;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
-    .terms li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.58em;
-      width: 6px;
-      height: 6px;
-      border-radius: 1px;
-      background: var(--accent);
-    }
-
-    /* ---- About ---- */
-
-    .prose { max-width: 74ch; }
-
-    .prose p {
-      font-size: 1.0625rem;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    .prose p + p { margin-top: 1rem; }
-
-    /* ---- Contact ---- */
-
-    .contact-line { font-size: 1.0625rem; color: var(--ink); max-width: 46ch; }
-    #contact .btn { margin-top: 1.25rem; }
-
-    /* ---- Footer ---- */
-
-    footer {
-      margin-top: auto;
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-      font-size: 0.8125rem;
-      color: var(--faint);
-    }
-
-    /* ---- Breakpoints ---- */
-
-    @media (max-width: 64rem) {
-      :root { --pad: 2rem; }
-      .hero { padding-top: 3.5rem; padding-bottom: 3.25rem; }
-      .section { padding-top: 3.25rem; padding-bottom: 3.25rem; }
-    }
-
-    @media (max-width: 62rem) {
-      .proof { grid-template-columns: 1fr; }
-
-      .proof p {
-        padding: 0.875rem 0;
-        border-left: 0;
-        border-top: 1px solid var(--band-line);
-      }
-
-      .proof p:first-child { padding-top: 1.125rem; border-top: 0; }
-      .proof p:last-child { padding-bottom: 1.125rem; }
-
-    }
-
-    @media (max-width: 55rem) {
-      .terms { grid-template-columns: 1fr; row-gap: 0.875rem; }
-    }
-
-    @media (max-width: 40rem) {
-      :root { --pad: 1.375rem; }
-
-      .hero { padding-top: 2.75rem; padding-bottom: 2.5rem; }
-      .section { padding-top: 2.75rem; padding-bottom: 2.75rem; }
-
-      .panel { padding: 1.375rem 1.25rem; }
-
-      .rows > div {
-        grid-template-columns: 1fr;
-        row-gap: 0.1875rem;
-        padding: 0.875rem 0;
-      }
-
-      .prose p { font-size: 1rem; }
-      .contact-line { font-size: 1rem; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrismCore | Identity, access and IT automation</title>
+<meta name="description" content="We set up identity and access so new hires get the right access on day one and leavers lose it the same day. For growing companies of 30 to 500 people.">
+<meta property="og:title" content="PrismCore | Identity, access and IT automation">
+<meta property="og:description" content="We set up identity and access so new hires get the right access on day one and leavers lose it the same day. For growing companies of 30 to 500 people.">
+<meta name="theme-color" content="#1F5C46">
+<link rel="canonical" href="https://prismcoretech.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="main.js" defer></script>
 </head>
 <body>
 
-  <div class="topbeam"></div>
+<header>
+  <div class="container header-row">
+    <a class="logo" href="#top">
+      <svg width="36" height="36" viewBox="144 150 204 204" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M246 157 L262.5 190 H229.5 Z M223 203 H269 L280.5 226 H211.5 Z M205 239 H287 L300.5 266 H191.5 Z M185 279 H307 L320.5 306 H171.5 Z M232 319 H165 L151 347.5 H341 L327 319 H260"/><circle cx="246" cy="319" r="4" fill="currentColor" stroke="none"/></svg>
+      PrismCore
+    </a>
+    <a class="button button-primary button-header" href="https://calendly.com/REPLACE-ME" target="_blank" rel="noopener" data-calendly>Book a call</a>
+  </div>
+</header>
 
-  <header class="topbar">
-    <div class="shell topbar-in">
-      <span class="brand">
-        <span class="mark"><img src="mark.png" alt="" /></span>
-        <span class="wordmark">PrismCore</span>
-      </span>
-      <a class="nav-link" href="#contact">Contact</a>
+<main>
+
+  <section class="container hero">
+    <h1 class="display">People come and go.<br>Your security doesn't.</h1>
+    <p class="lead">We set up a system that gives every new hire the right tools on day one and locks out terminated employees same day. When it's done, we hand it over with clear docs, or keep running it for you.</p>
+    <div class="button-row">
+      <a class="button button-primary" href="https://calendly.com/REPLACE-ME" target="_blank" rel="noopener" data-calendly>Book a discovery call</a>
+      <a class="button button-secondary" href="#how">See how it works</a>
     </div>
-  </header>
+    <p class="fine hero-tools">Works with Microsoft 365, Google Workspace, Okta, JumpCloud and more.</p>
 
-  <main>
-
-    <section class="hero shell">
-      <h1>Okta help for growing IT teams</h1>
-      <p class="lede">Cleanup, integrations, provisioning, and MFA rollouts for growing companies without a dedicated identity engineer.</p>
-      <a class="btn" href="mailto:jacob@prismcoretech.com">Email me</a>
-    </section>
-
-    <section class="band">
-      <div class="shell proof">
-        <p>Led an organization-wide Okta rollout</p>
-        <p>SSO and SCIM across dozens of apps</p>
-        <p>Company-wide MFA for 1,200 users</p>
+    <div class="grid grid-280">
+      <div class="card lifecycle-card">
+        <div class="lifecycle-card-top">
+          <span class="label">First day</span>
+          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="#DCEBE3"/><path d="M14 8 V20 M8 14 H20" stroke="#1F5C46" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h2 class="card-title">Ready before they log in</h2>
+        <p class="card-text">Email, apps and the right permissions, set up automatically from their role.</p>
       </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <h2>What I do</h2>
-        <dl class="rows">
-          <div>
-            <dt>Tenant cleanup:</dt>
-            <dd>Stale accounts, group sprawl, app assignments, and admin roles, fixed without breaking anyone's access.</dd>
-          </div>
-          <div>
-            <dt>App integrations:</dt>
-            <dd>SAML and OIDC, new or broken.</dd>
-          </div>
-          <div>
-            <dt>Provisioning:</dt>
-            <dd>SCIM and lifecycle automation so onboarding and offboarding happen on time.</dd>
-          </div>
-          <div>
-            <dt>MFA rollouts:</dt>
-            <dd>Okta Verify and phishing-resistant MFA, including getting people enrolled.</dd>
-          </div>
-          <div>
-            <dt>Automation:</dt>
-            <dd>Okta API tooling for the repetitive admin work nobody has time for.</dd>
-          </div>
-        </dl>
+      <div class="card lifecycle-card">
+        <div class="lifecycle-card-top">
+          <span class="label">New role</span>
+          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="#DCEBE3"/><path d="M8 11 H19 L16 8 M20 17 H9 L12 20" fill="none" stroke="#1F5C46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2 class="card-title">Access moves with them</h2>
+        <p class="card-text">New access added, old access removed. Nobody files a ticket.</p>
       </div>
-    </section>
+      <div class="card lifecycle-card">
+        <div class="lifecycle-card-top">
+          <span class="label">Last day</span>
+          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="#DCEBE3"/><path d="M8 14 H20" stroke="#1F5C46" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h2 class="card-title">Locked out the same day</h2>
+        <p class="card-text">Every account closed, including the apps nobody remembers.</p>
+      </div>
+    </div>
+    <p class="fine hero-footnote">All three run off your HR system. When HR makes a change, access follows.</p>
+  </section>
 
-    <section class="section">
-      <div class="shell">
-        <h2>How engagements work</h2>
-        <div class="panel">
-          <ul class="terms">
-            <li>Fixed scope and price, agreed in writing before any work starts.</li>
-            <li>Least-privilege access that you control and can revoke anytime.</li>
-            <li>Every change piloted with a small group before it reaches everyone.</li>
-            <li>NDA on every project. BAA for healthcare.</li>
-            <li>Documentation at handoff so your team can run it after.</li>
-            <li>Ongoing support on a monthly retainer if you want it after the project.</li>
+  <section id="work" class="container featured">
+    <div class="panel-green">
+      <p class="eyebrow">Featured work</p>
+      <h2 class="h2-panel featured-title">1,000+ people on one identity system, built from scratch.</h2>
+      <p class="featured-text">Done by our founder, Jacob, for a HIPAA-regulated organization.</p>
+      <ul class="unstyled-list checklist">
+        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6" fill="none" stroke="#CFE5DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Okta rolled out from scratch, with MFA across the organization</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6" fill="none" stroke="#CFE5DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A custom sync that feeds HR data into Okta</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6" fill="none" stroke="#CFE5DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A custom SCIM server for apps with no built-in support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6" fill="none" stroke="#CFE5DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Internal tools that automate onboarding and offboarding tasks</span></li>
+      </ul>
+      <div class="grid grid-200 stats">
+        <div class="stat"><p class="stat-value">Under 1 min</p><p class="stat-label">to set up a new hire</p></div>
+        <div class="stat"><p class="stat-value">Under 1 min</p><p class="stat-label">to lock out someone who leaves</p></div>
+        <div class="stat"><p class="stat-value">20+</p><p class="stat-label">apps connected with SSO and SCIM</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container section">
+      <h2 class="h2 section-head">For companies that grew faster than their access rules.</h2>
+      <p class="section-intro">Usually 30 to 500 people, with no one dedicated to identity. Access gets handed out by whoever's free and revoked when someone remembers weeks later.</p>
+      <div class="grid grid-240">
+        <div class="role-card">
+          <p class="label">IT managers</p>
+          <p class="role-pain">An ex-employee still has a working login, months after their last day.</p>
+          <p class="role-outcome">Fewer access tickets. No more manual offboarding.</p>
+        </div>
+        <div class="role-card">
+          <p class="label">Ops and security leads</p>
+          <p class="role-pain">The admin password is shared, and nobody's sure who still has it.</p>
+          <p class="role-outcome">Admin access locked down. Audit evidence ready before anyone asks.</p>
+        </div>
+        <div class="role-card">
+          <p class="label">HR leaders</p>
+          <p class="role-pain">New hires spend their first morning waiting on logins.</p>
+          <p class="role-outcome">New hires working on day one. Exits handled the same day.</p>
+        </div>
+        <div class="role-card">
+          <p class="label">Founders</p>
+          <p class="role-pain">A customer security questionnaire asks how you offboard people, and nobody has a good answer.</p>
+          <p class="role-outcome">Fast, honest answers for customer security reviews and cyber insurance forms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="container section">
+    <h2 class="h2 section-head">What we fix</h2>
+    <p class="section-intro">Whatever your tools or your mess, we've probably seen it. Tools named here are examples, not the full list.</p>
+    <div class="grid grid-services">
+
+      <article class="card service-card">
+        <span class="tag tag-green">The core</span>
+        <h3 class="card-title">Control who gets in</h3>
+        <p class="card-text">Clean up your login system, add single sign-on and two-step login, automate hires, role changes and exits, and lock down admin accounts.</p>
+        <p class="service-tools">Microsoft Entra, Okta, Google Workspace, JumpCloud and more. SSO, SCIM, MFA.</p>
+        <details class="expander">
+          <summary>What's included</summary>
+          <ul>
+            <li>Identity provider setup and cleanup: Microsoft Entra, Okta, Google Workspace, JumpCloud and others</li>
+            <li>SSO and SCIM rollout across your SaaS apps</li>
+            <li>MFA rollout, including phishing-resistant MFA for admins and key people</li>
+            <li>Conditional access policies</li>
+            <li>Automated hires, role changes and exits, tied to your HR system</li>
+            <li>Privileged access: separate admin accounts, just-in-time elevation, removing local admin rights</li>
+            <li>Password vault rollout: 1Password, Bitwarden, Keeper and others</li>
+            <li>Role-based access design and recurring access reviews</li>
+            <li>Service account and API key inventory and cleanup</li>
           </ul>
+        </details>
+      </article>
+
+      <article class="card service-card">
+        <span class="tag tag-neutral">Connect it all</span>
+        <h3 class="card-title">Connect HR to everything</h3>
+        <p class="card-text">Your HR system drives every account. Access reviews and audit evidence run on a schedule. Every automation comes documented.</p>
+        <p class="service-tools">BambooHR, Rippling, Gusto, ADP, Workday and more</p>
+        <details class="expander">
+          <summary>What's included</summary>
+          <ul>
+            <li>User provisioning and deprovisioning through SCIM, Microsoft Graph, Power Automate or scripts, whatever fits your stack</li>
+            <li>Automated access reviews and audit evidence collection</li>
+            <li>Custom integrations between your HR system, identity provider, ticketing and SaaS tools</li>
+            <li>Internal tools and scripts, handed over with documentation so your team owns them</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card service-card">
+        <span class="tag tag-green">AI access</span>
+        <h3 class="card-title">Give your AI tools safe access</h3>
+        <p class="card-text">AI agents and automations need access to your systems to be useful. We give each one its own identity with only the permissions it needs, and logs you can review, so you can put AI to work without breaking your security or compliance rules.</p>
+        <p class="service-tools">Microsoft Copilot, ChatGPT, Claude, Gemini, MCP servers and more.</p>
+        <details class="expander">
+          <summary>What's included</summary>
+          <ul>
+            <li>A review of what your current AI tools can see and who can use them</li>
+            <li>Separate identities for AI agents and automations, never shared user accounts</li>
+            <li>Scoped permissions, so each agent gets only the access its job needs</li>
+            <li>API keys and tokens kept in a vault and rotated, not pasted into code or prompts</li>
+            <li>Logging and access reviews that show what AI touched, for audits and security questionnaires</li>
+            <li>Rules for which AI tools staff can connect to company data</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card service-card">
+        <span class="tag tag-dark">Fixed price</span>
+        <h3 class="card-title">Start small</h3>
+        <p class="card-text">One fixed-price check before any big project: offboarding and access, AI tool access, Microsoft 365 or Google Workspace, email security, security questionnaires, or SOC 2 and HIPAA evidence.</p>
+        <p class="service-tools">Credited toward your project if you sign within 30 days.</p>
+        <details class="expander">
+          <summary>What's included</summary>
+          <ul>
+            <li>Access and offboarding assessment</li>
+            <li>Microsoft 365 or Google Workspace security review: MFA, conditional access, admin roles, sharing</li>
+            <li>Email security check: SPF, DKIM, DMARC</li>
+            <li>AI access review: what your AI tools can see and who can use them</li>
+            <li>Help with customer security questionnaires and cyber insurance questionnaires</li>
+            <li>Identity and access controls and evidence for SOC 2 and HIPAA. We prepare the controls and evidence; we are not auditors.</li>
+          </ul>
+        </details>
+      </article>
+
+    </div>
+    <p class="services-after">After the project, we can hand everything over or keep it running for you on a monthly plan that covers changes, reviews and upkeep.</p>
+  </section>
+
+  <section id="how" class="band">
+    <div class="container section">
+      <h2 class="h2 section-head">How we work</h2>
+      <p class="section-intro">You keep control of your systems the whole way through.</p>
+      <ol class="unstyled-list grid grid-200 steps">
+        <li class="step"><span class="step-number">1</span><h3 class="step-title">Discovery call</h3><p class="step-text">Tell us what's going on. You'll get a free resource picked for your business.</p></li>
+        <li class="step"><span class="step-number">2</span><h3 class="step-title">One-page plan</h3><p class="step-text">Fixed scope and price, agreed before we start.</p></li>
+        <li class="step"><span class="step-number">3</span><h3 class="step-title">Test with a small group</h3><p class="step-text">Changes reach a few people before everyone.</p></li>
+        <li class="step"><span class="step-number">4</span><h3 class="step-title">Hand it over, or we run it</h3><p class="step-text">Plain-English docs your team can actually use, or a monthly plan where we manage and maintain it.</p></li>
+      </ol>
+      <div class="chips">
+        <span class="chip-outline">We only get the access we need. Cut it off any time.</span>
+        <span class="chip-outline">NDA as standard</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container section-top-only">
+    <div class="about">
+      <h2 class="h2-panel about-title">Who you'll work with</h2>
+      <div class="about-body">
+        <p class="about-name">Jacob</p>
+        <p class="about-role">Founder</p>
+        <p class="about-text">I've been on the small IT team that couldn't keep up with access control as the company grew. Over time, I built the systems that fixed it: onboarding and offboarding automation, SSO and SCIM for 20+ apps, and custom tools that connect HR systems to SaaS apps. Together they saved my team 20+ hours of manual work every week.</p>
+        <p class="about-text">Working with PrismCore means you and your IT team spend your time on the projects that grow your business, not on worrying who has access to what.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="container section-top-only">
+    <h2 class="h2 faq-title">Questions we usually get</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How can we trust you with access to our systems?</summary>
+        <div class="faq-answer"><p>You control our access to every system and can revoke it at any time. Before we start, we agree together on the minimum access the work needs, and you remove it as soon as the project is done or your retainer ends. It's all laid out in a clear contract, with an NDA as standard.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>What if you break our logins?</summary>
+        <div class="faq-answer"><p>Every rollout is staged. We test with test users and a small pilot group before it reaches everyone else, and a rollback plan is ready in the rare case something goes wrong.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Our IT team or MSP can handle this.</summary>
+        <div class="faq-answer"><p>We'd rather work alongside them. Specialized identity and automation skills are rare and expensive to hire at your size, and that's the gap we fill. We're not here to replace anyone: we hand the systems over to your team or help maintain them, and either way they get real time back each week.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>We already do it manually, and it works.</summary>
+        <div class="faq-answer">
+          <p>Manual works up to a point. Then the company grows, a hiring surge hits, or one termination gets missed. In a 2026 survey of 1,000 U.S. former employees, a third could still log in to their old work email. It only takes one missed account. We tie offboarding to your HR system, so when someone leaves, every account they had is closed the same day.</p>
+          <p class="faq-source">Source: Sagiss, 2026 Managed Security Report: Employee Offboarding.</p>
         </div>
+      </details>
+      <details class="faq-item">
+        <summary>What does it cost?</summary>
+        <div class="faq-answer"><p>Most teams start with a fixed-price assessment, starting at $2,000. Larger projects are priced on company size, how many apps and users are involved, and a few other factors. We'd rather not guess without seeing your setup, so we go over pricing at the end of your discovery call.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="book" class="container section">
+    <div class="panel-white">
+      <div class="book-intro">
+        <h2 class="h2-panel">See where your access stands.</h2>
+        <p>Book a discovery call. You'll talk to the engineer who does the work. We'll tell you what we'd fix first and whether we're the right fit.</p>
       </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <h2>About</h2>
-        <div class="prose">
-          <p>I'm Jacob, an experienced Okta administrator. I've worked at companies of 1,000+ employees, including HIPAA-regulated healthcare, and led a full Okta rollout end to end: SSO and SCIM across dozens of SaaS apps, attribute-based access control, and company-wide MFA.</p>
-          <p>I built custom sync middleware with Workday, developed RBAC models and JML automations that tightened up onboarding and offboarding, and wrote a custom SCIM router for the apps where Okta's built-in integrations don't exist or where we needed more control over the workflow.</p>
-          <p>PrismCore is my practice, and you work with me directly.</p>
-        </div>
+      <div class="resource-box">
+        <p class="resource-box-title">As a thank you, we'll send one free resource picked for your business.</p>
+        <ul class="unstyled-list resource-chips">
+          <li>Email security snapshot</li>
+          <li>Offboarding checklist for your tools</li>
+          <li>AI access checklist</li>
+          <li class="chip-more">and more</li>
+        </ul>
       </div>
-    </section>
+      <a class="button button-primary" href="https://calendly.com/REPLACE-ME" target="_blank" rel="noopener" data-calendly>Book a discovery call</a>
+    </div>
+  </section>
 
-    <section class="section tint" id="contact">
-      <div class="shell">
-        <h2>Contact</h2>
-        <p class="contact-line">Tell me what's going on in your Okta tenant.</p>
-        <a class="btn btn-ghost" href="mailto:jacob@prismcoretech.com">jacob@prismcoretech.com</a>
-      </div>
-    </section>
+</main>
 
-  </main>
-
-  <footer>
-    <div class="shell">&copy; 2026 PrismCore AI LLC.</div>
-  </footer>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">PrismCore</p>
+      <p class="fine">Identity, access and IT automation for growing companies.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#services">Services</a>
+      <a href="#how">How we work</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="https://calendly.com/REPLACE-ME" target="_blank" rel="noopener" data-calendly>Contact</a>
+      <a href="/privacy">Privacy policy</a>
+    </nav>
+    <p class="footer-copy">© <span id="year">2026</span> PrismCore</p>
+  </div>
+</footer>
 
 </body>
 </html>
